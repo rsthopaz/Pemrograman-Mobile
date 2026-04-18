@@ -13,10 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.ets.ui.theme.ETSTheme
 import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.GridLayoutManager
 import android.content.Intent
+import com.example.ets.adapter.AnimeAdapter
 
 class MainActivity : AppCompatActivity() {
 
@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = GridLayoutManager(this, 2)
 
         recyclerView.adapter = AnimeAdapter(animeList) { anime ->
+
             val intent = Intent(this, DetailActivity::class.java)
             intent.putExtra("title", anime.title)
             intent.putExtra("image", anime.imageUrl)
@@ -55,6 +56,7 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("genre", anime.genre)
             intent.putExtra("rating", anime.rating)
             intent.putExtra("synopsis", anime.synopsis)
+
             startActivity(intent)
         }
     }
