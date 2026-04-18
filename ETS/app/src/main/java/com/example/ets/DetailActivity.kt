@@ -1,4 +1,8 @@
 package com.example.ets
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.ImageView
+import android.widget.TextView
 
 class DetailActivity : AppCompatActivity() {
 

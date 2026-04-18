@@ -1,3 +1,10 @@
+import android.view.*
+import android.widget.*
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.ets.Anime
+import com.example.ets.R
+
 class `AnimeAdapter.kt`(
     private val list: List<Anime>,
     private val onClick: (Anime) -> Unit
