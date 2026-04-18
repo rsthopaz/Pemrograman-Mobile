@@ -13,35 +13,44 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.ets.ui.theme.ETSTheme
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            ETSTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+        setContentView(R.layout.activity_main)
+
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+
+        val animeList = listOf(
+            Anime(
+                "Naruto",
+                "https://via.placeholder.com/300",
+                "2002",
+                "Action",
+                "8.5",
+                "Cerita ninja dari desa Konoha"
+            ),
+            Anime(
+                "Attack on Titan",
+                "https://via.placeholder.com/300",
+                "2013",
+                "Action, Drama",
+                "9.0",
+                "Manusia melawan titan"
+            )
+        )
+
+        recyclerView.layoutManager = GridLayoutManager(this, 2)
+
+        recyclerView.adapter = AnimeAdapter(animeList) { anime ->
+            val intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra("title", anime.title)
+            intent.putExtra("image", anime.imageUrl)
+            intent.putExtra("date", anime.releaseDate)
+            intent.putExtra("genre", anime.genre)
+            intent.putExtra("rating", anime.rating)
+            intent.putExtra("synopsis", anime.synopsis)
+            startActivity(intent)
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ETSTheme {
-        Greeting("Android")
     }
 }
