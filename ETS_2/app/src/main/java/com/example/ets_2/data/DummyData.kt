@@ -10,6 +10,8 @@ object DummyData {
         Anime(
             id = 1,
             title = "Naruto",
+            season = "Airing",
+            eps = "Unknown",
             imageRes = R.drawable.naruto,
             releaseDate = "2002",
             genre = listOf("Action", "Adventure"),
@@ -19,8 +21,10 @@ object DummyData {
         Anime(
             id = 2,
             title = "One Piece",
+            season = "Airing",
+            eps = "Unknown",
             imageRes = R.drawable.onepiece,
-            releaseDate = "1999",
+            releaseDate = "TV - 1999",
             genre = listOf("Action", "Adventure"),
             rating = "9.0",
             synopsis = "Pirate adventure"
