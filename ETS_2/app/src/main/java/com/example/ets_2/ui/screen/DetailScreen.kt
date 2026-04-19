@@ -95,8 +95,16 @@ fun DetailScreen(animeId: Int) {
                 Spacer(modifier = Modifier.height(10.dp))
 
                 additionalinformation("Type", it.type)
-                
-                Text(text = "Type: ${it.type}")
+                additionalinformation("Aired", it.aired)
+                additionalinformation("Premiered", it.premiered)
+                additionalinformation("Producers", it.producers)
+                additionalinformation("Licensors", it.licensors)
+                additionalinformation("Studio", it.studio)
+                additionalinformation("Source", it.source)
+                additionalinformation("Duration", it.duration)
+                additionalinformation("Rating", it.pgrating)
+
+
             }
 
 
@@ -126,13 +134,18 @@ fun maininformation(icon: Int, label: String, value: String){
 @Composable
 fun additionalinformation(label: String, value: String){
     Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween
+        modifier = Modifier.fillMaxWidth()
     ) {
         Text(
             text = label,
-            fontWeight = FontWeight.SemiBold
+            fontWeight = FontWeight.SemiBold,
+            modifier = Modifier.weight(1f)
         )
-        Text(text = value)
+       
+        Text(text = value,
+            modifier = Modifier.weight(2f))
+
+
     }
+    Spacer(modifier = Modifier.height(5.dp))
 }
