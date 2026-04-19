@@ -4,7 +4,7 @@ data class Anime(
     val title: String,
     val imageRes: Int,
     val releaseDate: String,
-    val genre: String,
+    val genre: List<String>,
     val rating: String,
     val synopsis: String
 )

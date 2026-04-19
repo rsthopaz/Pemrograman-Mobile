@@ -7,6 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import coil.compose.rememberAsyncImagePainter
 
@@ -27,8 +28,9 @@ fun AnimeItem(
                 painter = painterResource(id = anime.imageRes),
                 contentDescription = anime.title,
                 modifier = Modifier
-                    .height(120.dp)
-                    .fillMaxWidth()
+                    .height(160.dp)
+                    .fillMaxWidth(),
+                contentScale = ContentScale.Crop
             )
             Text(
                 text = anime.title,
