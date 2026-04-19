@@ -57,73 +57,15 @@ fun DetailScreen(animeId: Int) {
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold
                         )
-
-                    Row(verticalAlignment = Alignment.CenterVertically){
-                        Icon(
-                            painter = painterResource(id = R.drawable.movie_svgrepo_com),
-                            contentDescription = "Release",
-                            tint = MaterialTheme.colorScheme.onBackground,
-                            modifier = Modifier.size(16.dp)
-                        )
-                        Spacer(modifier = Modifier.size(6.dp))
-                        Spacer(modifier = Modifier.width(3.dp))
-                        Text(
-                            text = it.releaseDate,
-                            fontSize = 16.sp
-                        )
-                    }
-
-                    Row(verticalAlignment = Alignment.CenterVertically){
-                        Icon(
-                            painter = painterResource(id = R.drawable.wifi_1021_svgrepo_com),
-                            contentDescription = "Season",
-                            tint = MaterialTheme.colorScheme.onBackground,
-                            modifier = Modifier.size(16.dp)
-                        )
-                        Spacer(modifier = Modifier.size(6.dp))
-                        Spacer(modifier = Modifier.width(3.dp))
-                        Text(
-                            text = it.season,
-                            fontSize = 16.sp
-                        )
-                    }
-
-                    Row(verticalAlignment = Alignment.CenterVertically){
-                        Icon(
-                            painter = painterResource(id = R.drawable.timer_svgrepo_com),
-                            contentDescription = "Release",
-                            tint = MaterialTheme.colorScheme.onBackground,
-                            modifier = Modifier.size(16.dp)
-                        )
-                        Spacer(modifier = Modifier.size(6.dp))
-                        Spacer(modifier = Modifier.width(3.dp))
-                        Text(
-                            text = it.eps,
-                            fontSize = 16.sp
-                        )
-                    }
-
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.star_svgrepo_com),
-                            contentDescription = "Release",
-                            tint = MaterialTheme.colorScheme.onBackground,
-                            modifier = Modifier.size(16.dp)
-                        )
-                        Spacer(modifier = Modifier.size(6.dp))
-                        Spacer(modifier = Modifier.width(3.dp))
-                        Text(
-                            text = it.rating,
-                            fontSize = 16.sp
-                        )
-                    }
+                    // icon: Int, label: string, value
+                    maininformation(icon = R.drawable.movie_svgrepo_com, label = "Release", value = it.releaseDate)
+                    maininformation(icon = R.drawable.wifi_1021_svgrepo_com, label = "Season", value = it.season)
+                    maininformation(icon = R.drawable.timer_svgrepo_com, label = "Total Episodes", value = it.eps)
+                    maininformation(icon = R.drawable.star_svgrepo_com, label = "Rating", value = it.rating)
 
                 }
-
-
             }
                 Spacer(modifier = Modifier.height(16.dp))
-
 
             LazyRow(
                 horizontalArrangement = Arrangement.spacedBy(2.dp)
@@ -143,8 +85,54 @@ fun DetailScreen(animeId: Int) {
                 Spacer(modifier = Modifier.height(10.dp))
             Text(text = it.synopsis)
             }
+            Spacer(modifier = Modifier.height(16.dp))
+            Column() {
+                Text(
+                    text = "More Information",
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                Spacer(modifier = Modifier.height(10.dp))
+
+                additionalinformation("Type", it.type)
+                
+                Text(text = "Type: ${it.type}")
+            }
 
 
         }
+    }
+}
+
+@Composable
+fun maininformation(icon: Int, label: String, value: String){
+    // icon: Int, label: string, value
+    Row(verticalAlignment = Alignment.CenterVertically){
+        Icon(
+            painter = painterResource(icon),
+            contentDescription = label,
+            tint = MaterialTheme.colorScheme.onBackground,
+            modifier = Modifier.size(16.dp)
+        )
+        Spacer(modifier = Modifier.size(6.dp))
+        Spacer(modifier = Modifier.width(3.dp))
+        Text(
+            text = value,
+            fontSize = 16.sp
+        )
+    }
+}
+
+@Composable
+fun additionalinformation(label: String, value: String){
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text(
+            text = label,
+            fontWeight = FontWeight.SemiBold
+        )
+        Text(text = value)
     }
 }
