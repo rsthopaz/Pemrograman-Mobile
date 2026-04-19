@@ -141,7 +141,7 @@ fun additionalinformation(label: String, value: String){
             fontWeight = FontWeight.SemiBold,
             modifier = Modifier.weight(1f)
         )
-       
+
         Text(text = value,
             modifier = Modifier.weight(2f))
 
