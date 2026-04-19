@@ -15,10 +15,12 @@ import com.example.ets_2.ui.components.AnimeItem
 fun GalleryScreen(navController: NavController) {
     val animeList = DummyData.animeList
 
+    
+
     LazyHorizontalGrid(
         rows = GridCells.Fixed(1),
         contentPadding = PaddingValues(2.dp),
-        modifier = Modifier.height(280.dp),
+        modifier = Modifier.height(250.dp),
 
 
     ) {
