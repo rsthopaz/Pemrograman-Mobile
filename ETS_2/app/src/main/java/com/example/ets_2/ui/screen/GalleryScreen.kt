@@ -1,4 +1,5 @@
 package com.example.ets_2.ui.screen
+import android.R.attr.text
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -15,9 +16,13 @@ import com.example.ets_2.ui.components.AnimeItem
 fun GalleryScreen(navController: NavController) {
     val animeList = DummyData.animeList
 
-    
+    Column(modifier = Modifier.padding(top = 20.dp)) {
 
-    LazyHorizontalGrid(
+        Text(
+        text="Today", modifier = Modifier.padding(start = 12.dp))
+
+
+        LazyHorizontalGrid(
         rows = GridCells.Fixed(1),
         contentPadding = PaddingValues(2.dp),
         modifier = Modifier.height(250.dp),
@@ -29,5 +34,6 @@ fun GalleryScreen(navController: NavController) {
                 navController.navigate("detail/${anime.id}")
             }
         }
+    }
     }
 }
