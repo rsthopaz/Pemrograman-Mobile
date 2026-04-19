@@ -8,6 +8,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.navigation.NavController
 import androidx.navigation.compose.*
 import coil.compose.rememberAsyncImagePainter
@@ -123,13 +125,24 @@ fun DetailScreen(animeId: Int) {
                 Spacer(modifier = Modifier.height(16.dp))
 
 
-            Row{
-                it.genre.forEach { g -> GenreChip(g) }
+            LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(2.dp)
+            ){
+                items(it.genre) {
+                    g -> GenreChip(g)
+                }
             }
 
             Spacer(modifier = Modifier.height(16.dp))
-
+            Column() {
+            Text(
+                text = "Synopsis",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold
+            )
+                Spacer(modifier = Modifier.height(10.dp))
             Text(text = it.synopsis)
+            }
 
 
         }
