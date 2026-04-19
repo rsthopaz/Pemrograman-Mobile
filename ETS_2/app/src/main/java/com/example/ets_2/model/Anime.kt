@@ -8,5 +8,16 @@ data class Anime(
     val releaseDate: String,
     val genre: List<String>,
     val rating: String,
-    val synopsis: String
+    val synopsis: String,
+
+    // more informations
+    val type: String,
+    val aired: String,
+    val premiered: String,
+    val producers: String,
+    val licensors: String,
+    val studio : String,
+    val source: String,
+    val duration: String,
+    val pgrating: String
 )

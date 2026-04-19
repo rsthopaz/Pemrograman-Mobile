@@ -16,7 +16,16 @@ object DummyData {
             releaseDate = "2002",
             genre = listOf("Action", "Adventure"),
             rating = "8.5",
-            synopsis = "A ninja story"
+            synopsis = "A ninja story",
+            type = "TV",
+            aired = "",
+            premiered = "",
+            producers = "",
+            licensors = "",
+            studio = "",
+            source = "",
+            duration = "",
+            pgrating = ""
         ),
         Anime(
             id = 2,
@@ -33,7 +42,17 @@ object DummyData {
                     "\n" +
                     "As he faces numerous challenges with a big smile on his face, Luffy gathers one-of-a-kind companions to join him in his ambitious endeavor, together embracing perils and wonders on their once-in-a-lifetime adventure.\n" +
                     "\n" +
-                    "[Written by MAL Rewrite]"
+                    "[Written by MAL Rewrite]",
+            type = "TV",
+
+            aired = "Oct 20, 1999 to ?",
+            premiered = "Fall 1999",
+            producers = "Fuji TV, TAP",
+            licensors = "Funimation, 4Kids Entertainment",
+            studio = "Toei Animation",
+            source = "Manga",
+            duration = "24 min. per ep",
+            pgrating = "PG-13 - Teens 13 or older"
         )
     )
 }
