@@ -9,6 +9,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.*
 import coil.compose.rememberAsyncImagePainter
 import androidx.compose.foundation.lazy.grid.*
+import androidx.compose.ui.res.painterResource
 import com.example.ets_2.data.DummyData
 import com.example.ets_2.ui.components.AnimeItem
 @Composable
@@ -19,7 +20,7 @@ fun DetailScreen(animeId: Int) {
         Column(modifier = Modifier.padding(16.dp)) {
 
             Image(
-                painter = rememberAsyncImagePainter(it.imageUrl),
+                painter = painterResource(id = anime.imageRes),
                 contentDescription = it.title,
                 modifier = Modifier
                     .height(200.dp)

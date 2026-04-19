@@ -1,6 +1,8 @@
 package com.example.ets_2.data
 
+import com.example.ets_2.R
 import com.example.ets_2.model.Anime
+
 
 object DummyData {
 
@@ -8,7 +10,7 @@ object DummyData {
         Anime(
             id = 1,
             title = "Naruto",
-            imageUrl = "https://via.placeholder.com/150",
+            imageRes = R.drawable.naruto,
             releaseDate = "2002",
             genre = "Action",
             rating = "8.5",
@@ -17,7 +19,7 @@ object DummyData {
         Anime(
             id = 2,
             title = "One Piece",
-            imageUrl = "https://via.placeholder.com/150",
+            imageRes = R.drawable.onepiece,
             releaseDate = "1999",
             genre = "Adventure",
             rating = "9.0",

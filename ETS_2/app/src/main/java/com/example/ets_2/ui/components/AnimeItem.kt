@@ -7,6 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.ui.res.painterResource
 import coil.compose.rememberAsyncImagePainter
 
 import com.example.ets_2.model.Anime
@@ -23,7 +24,7 @@ fun AnimeItem(
     ) {
         Column {
             Image(
-                painter = rememberAsyncImagePainter(anime.imageUrl),
+                painter = painterResource(id = anime.imageRes),
                 contentDescription = anime.title,
                 modifier = Modifier
                     .height(120.dp)
