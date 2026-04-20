@@ -15,6 +15,8 @@ import androidx.navigation.compose.*
 import coil.compose.rememberAsyncImagePainter
 import androidx.compose.foundation.lazy.grid.*
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.mutableStateListOf
@@ -73,11 +75,14 @@ fun GalleryScreen(
             }
         }
     ) { padding ->
+        val scrollState = rememberScrollState()
 
         Column(
             modifier = Modifier
+                .fillMaxSize()
                 .padding(padding)
                 .background(MaterialTheme.colorScheme.background)
+                .verticalScroll(scrollState)
         ) {
             AnimeSection("Today", animeList.take(5), navController)
             AnimeSection("This Season", animeList.drop(5).take(5), navController)
@@ -117,7 +122,7 @@ fun AnimeSection(title: String, list: List<Anime>, navController: NavController)
         LazyHorizontalGrid(
             rows = GridCells.Fixed(1),
             contentPadding = PaddingValues(2.dp),
-            modifier = Modifier.height(260.dp),
+            modifier = Modifier.height(250.dp),
 
 
             ) {
