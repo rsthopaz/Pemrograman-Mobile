@@ -28,11 +28,15 @@ import com.example.ets_2.data.DummyData
 import com.example.ets_2.ui.components.AnimeItem
 import com.example.ets_2.ui.components.GenreChip
 import com.example.ets_2.R
+import com.example.ets_2.model.Anime
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailScreen(animeId: Int,navController: NavController, onToggleDarkMode: () -> Unit) {
-    val anime = DummyData.animeList.find { it.id == animeId }
+fun DetailScreen(animeId: Int,
+                 navController: NavController,
+                 animeList: List<Anime>,
+                 onToggleDarkMode: () -> Unit) {
+    val anime = animeList.find { it.id == animeId }
     Scaffold(
         topBar = {
             TopAppBar(

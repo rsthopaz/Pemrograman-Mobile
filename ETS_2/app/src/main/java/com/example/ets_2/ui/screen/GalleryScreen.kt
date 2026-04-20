@@ -33,12 +33,10 @@ import com.example.ets_2.ui.components.AnimeItem
 @Composable
 fun GalleryScreen(
     navController: NavController,
+    animeList: MutableList<Anime>,
     onToggleDarkMode: () -> Unit
 ) {
 
-    val animeList = remember { mutableStateListOf<Anime>().apply {
-        addAll(DummyData.animeList)
-    }}
 
     var showDialog by remember { mutableStateOf(false) }
     var selectedImage by remember { mutableStateOf<String?>(null) }
