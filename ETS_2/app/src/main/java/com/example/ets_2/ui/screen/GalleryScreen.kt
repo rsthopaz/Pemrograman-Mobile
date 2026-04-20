@@ -43,7 +43,6 @@ fun GalleryScreen(
     var showDialog by remember { mutableStateOf(false) }
     var selectedImage by remember { mutableStateOf<String?>(null) }
 
-    // 📷 IMAGE PICKER
     val imagePicker = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
     ) { uri ->
@@ -89,20 +88,6 @@ fun GalleryScreen(
             AnimeSection("Recommendations", animeList.drop(10).take(6), navController)
         }
 
-        // 🧾 ADD DIALOG
-        if (showDialog) {
-            AddAnimeDialog(
-                imagePicker = imagePicker,
-                selectedImage = selectedImage,
-                onDismiss = {
-                    showDialog = false
-                    selectedImage = null
-                },
-                onAdd = { newAnime ->
-                    animeList.add(newAnime)
-                }
-            )
-        }
     }
 }
 
@@ -133,79 +118,4 @@ fun AnimeSection(title: String, list: List<Anime>, navController: NavController)
             }
         }
     }
-}
-
-@Composable
-fun AddAnimeDialog(
-    imagePicker: ActivityResultLauncher<String>,
-    selectedImage: String?,
-    onDismiss: () -> Unit,
-    onAdd: (Anime) -> Unit
-) {
-
-    var title by remember { mutableStateOf("") }
-    var season by remember { mutableStateOf("") }
-    var eps by remember { mutableStateOf("") }
-    var release by remember { mutableStateOf("") }
-    var rating by remember { mutableStateOf("") }
-    var synopsis by remember { mutableStateOf("") }
-
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        title = { Text("Add Anime") },
-        text = {
-            Column {
-
-                OutlinedTextField(title, { title = it }, label = { Text("Title") })
-                OutlinedTextField(season, { season = it }, label = { Text("Season") })
-                OutlinedTextField(eps, { eps = it }, label = { Text("Episodes") })
-
-                Spacer(modifier = Modifier.height(10.dp))
-
-                // 📷 PICK IMAGE BUTTON
-                Button(onClick = {
-                    imagePicker.launch("image/*")
-                }) {
-                    Text("Pick Image")
-                }
-
-                if (selectedImage != null) {
-                    Text("Image selected ✓")
-                }
-
-                OutlinedTextField(release, { release = it }, label = { Text("Release") })
-                OutlinedTextField(rating, { rating = it }, label = { Text("Rating") })
-                OutlinedTextField(synopsis, { synopsis = it }, label = { Text("Synopsis") })
-            }
-        },
-        confirmButton = {
-            Button(onClick = {
-                onAdd(
-                    Anime(
-                        id = (0..99999).random(),
-                        title = title,
-                        season = season,
-                        eps = eps,
-                        imageUri = selectedImage ?: "",
-                        releaseDate = release,
-                        genre = listOf("New"),
-                        rating = rating,
-                        synopsis = synopsis,
-                        type = "",
-                        aired = "",
-                        premiered = "",
-                        producers = "",
-                        licensors = "",
-                        studio = "",
-                        source = "",
-                        duration = "",
-                        pgrating = ""
-                    )
-                )
-                onDismiss()
-            }) {
-                Text("Add")
-            }
-        }
-    )
 }
