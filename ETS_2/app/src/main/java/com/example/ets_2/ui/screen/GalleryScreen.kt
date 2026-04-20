@@ -65,7 +65,9 @@ fun GalleryScreen(
 
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { showDialog = true }
+                onClick = {
+                    navController.navigate("add")
+                }
             ) {
                 Icon(Icons.Default.Add, contentDescription = "Add")
             }

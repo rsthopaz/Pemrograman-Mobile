@@ -23,6 +23,7 @@ import com.example.ets_2.ui.screen.GalleryScreen
 import com.example.ets_2.ui.screen.DetailScreen
 import com.example.ets_2.data.DummyData
 import com.example.ets_2.model.Anime
+import com.example.ets_2.ui.screen.AddScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,6 +72,13 @@ fun AppNavigation(
                 animeList = animeList,
                 navController = navController,
                 onToggleDarkMode = onToggleDarkMode
+            )
+        }
+
+        composable("add"){
+            AddScreen(
+                navController = navController,
+                animeList = animeList
             )
         }
     }
