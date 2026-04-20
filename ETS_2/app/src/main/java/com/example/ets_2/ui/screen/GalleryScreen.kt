@@ -17,6 +17,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -105,4 +106,61 @@ fun AnimeSection(title: String, list: List<Anime>, navController: NavController)
             }
         }
     }
+}
+
+@Composable
+fun AddAnimeDialog(
+    onDismiss: () -> Unit,
+    onAdd: (Anime) -> Unit
+) {
+    var title by remember { mutableStateOf("") }
+    var season by remember { mutableStateOf("") }
+    var eps by remember { mutableStateOf("") }
+    var release by remember { mutableStateOf("") }
+    var rating by remember { mutableStateOf("") }
+    var synopsis by remember { mutableStateOf("") }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Add Anime") },
+        text = {
+            Column {
+                OutlinedTextField(title, { title = it }, label = { Text("Title") })
+                OutlinedTextField(season, { season = it }, label = { Text("Season") })
+                OutlinedTextField(eps, { eps = it }, label = { Text("Episodes") })
+                OutlinedTextField(release, { release = it }, label = { Text("Release Date") })
+                OutlinedTextField(rating, { rating = it }, label = { Text("Rating") })
+                OutlinedTextField(synopsis, { synopsis = it }, label = { Text("Synopsis") })
+            }
+        },
+        confirmButton = {
+            Button(onClick = {
+                onAdd(
+                    Anime(
+                        id = (0..99999).random(),
+                        title = title,
+                        season = season,
+                        eps = eps,
+                        imageUri = "", // nanti dari image picker
+                        releaseDate = release,
+                        genre = listOf("New"),
+                        rating = rating,
+                        synopsis = synopsis,
+                        type = "",
+                        aired = "",
+                        premiered = "",
+                        producers = "",
+                        licensors = "",
+                        studio = "",
+                        source = "",
+                        duration = "",
+                        pgrating = ""
+                    )
+                )
+                onDismiss()
+            }) {
+                Text("Add")
+            }
+        }
+    )
 }
