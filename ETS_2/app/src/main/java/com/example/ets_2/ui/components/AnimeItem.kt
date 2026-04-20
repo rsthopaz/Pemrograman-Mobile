@@ -29,7 +29,8 @@ fun AnimeItem(
 ) {
     Card(colors = CardDefaults.cardColors(containerColor = Color.Transparent),
         modifier = Modifier
-            .padding(8.dp)
+//            .padding(8.dp)
+            .padding(start = 15.dp)
             .width(120.dp)
             .clickable { onClick() }
     ) {
