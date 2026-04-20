@@ -1,5 +1,8 @@
 package com.example.ets_2.ui.screen
 import android.R.attr.text
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -32,11 +35,20 @@ fun GalleryScreen(
     navController: NavController,
     onToggleDarkMode: () -> Unit
 ) {
+
     val animeList = remember { mutableStateListOf<Anime>().apply {
         addAll(DummyData.animeList)
     }}
 
     var showDialog by remember { mutableStateOf(false) }
+    var selectedImage by remember { mutableStateOf<String?>(null) }
+
+    // 📷 IMAGE PICKER
+    val imagePicker = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent()
+    ) { uri ->
+        selectedImage = uri?.toString()
+    }
 
     Scaffold(
         topBar = {
@@ -46,7 +58,7 @@ fun GalleryScreen(
                     IconButton(onClick = onToggleDarkMode) {
                         Icon(
                             painter = painterResource(id = R.drawable.dark_theme_svgrepo_com),
-                            contentDescription = "Toggle Dark Mode"
+                            contentDescription = "Dark Mode"
                         )
                     }
                 }
@@ -57,7 +69,7 @@ fun GalleryScreen(
             FloatingActionButton(
                 onClick = { showDialog = true }
             ) {
-                Icon(Icons.Default.Add, contentDescription = "Add Anime")
+                Icon(Icons.Default.Add, contentDescription = "Add")
             }
         }
     ) { padding ->
@@ -67,16 +79,20 @@ fun GalleryScreen(
                 .padding(padding)
                 .background(MaterialTheme.colorScheme.background)
         ) {
-
             AnimeSection("Today", animeList.take(5), navController)
             AnimeSection("This Season", animeList.drop(5).take(5), navController)
-            AnimeSection("Recommendations", animeList.drop(10).take(10), navController)
+            AnimeSection("Recommendations", animeList.drop(10).take(6), navController)
         }
 
-        // 🔥 SHOW DIALOG
+        // 🧾 ADD DIALOG
         if (showDialog) {
             AddAnimeDialog(
-                onDismiss = { showDialog = false },
+                imagePicker = imagePicker,
+                selectedImage = selectedImage,
+                onDismiss = {
+                    showDialog = false
+                    selectedImage = null
+                },
                 onAdd = { newAnime ->
                     animeList.add(newAnime)
                 }
@@ -116,9 +132,12 @@ fun AnimeSection(title: String, list: List<Anime>, navController: NavController)
 
 @Composable
 fun AddAnimeDialog(
+    imagePicker: ActivityResultLauncher<String>,
+    selectedImage: String?,
     onDismiss: () -> Unit,
     onAdd: (Anime) -> Unit
 ) {
+
     var title by remember { mutableStateOf("") }
     var season by remember { mutableStateOf("") }
     var eps by remember { mutableStateOf("") }
@@ -131,10 +150,25 @@ fun AddAnimeDialog(
         title = { Text("Add Anime") },
         text = {
             Column {
+
                 OutlinedTextField(title, { title = it }, label = { Text("Title") })
                 OutlinedTextField(season, { season = it }, label = { Text("Season") })
                 OutlinedTextField(eps, { eps = it }, label = { Text("Episodes") })
-                OutlinedTextField(release, { release = it }, label = { Text("Release Date") })
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                // 📷 PICK IMAGE BUTTON
+                Button(onClick = {
+                    imagePicker.launch("image/*")
+                }) {
+                    Text("Pick Image")
+                }
+
+                if (selectedImage != null) {
+                    Text("Image selected ✓")
+                }
+
+                OutlinedTextField(release, { release = it }, label = { Text("Release") })
                 OutlinedTextField(rating, { rating = it }, label = { Text("Rating") })
                 OutlinedTextField(synopsis, { synopsis = it }, label = { Text("Synopsis") })
             }
@@ -147,7 +181,7 @@ fun AddAnimeDialog(
                         title = title,
                         season = season,
                         eps = eps,
-                        imageUri = "", // nanti dari image picker
+                        imageUri = selectedImage ?: "",
                         releaseDate = release,
                         genre = listOf("New"),
                         rating = rating,
