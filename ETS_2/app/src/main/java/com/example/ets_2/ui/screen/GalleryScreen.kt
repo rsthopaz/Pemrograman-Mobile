@@ -36,6 +36,8 @@ fun GalleryScreen(
         addAll(DummyData.animeList)
     }}
 
+    var showDialog by remember { mutableStateOf(false) }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -51,17 +53,11 @@ fun GalleryScreen(
             )
         },
 
-        // 🔥 FAB (ADD BUTTON)
         floatingActionButton = {
             FloatingActionButton(
-                onClick = {
-                    // nanti buka dialog add anime
-                }
+                onClick = { showDialog = true }
             ) {
-                Icon(
-                    imageVector = Icons.Default.Add,
-                    contentDescription = "Add Anime"
-                )
+                Icon(Icons.Default.Add, contentDescription = "Add Anime")
             }
         }
     ) { padding ->
@@ -74,7 +70,17 @@ fun GalleryScreen(
 
             AnimeSection("Today", animeList.take(5), navController)
             AnimeSection("This Season", animeList.drop(5).take(5), navController)
-            AnimeSection("Recommendations", animeList.drop(10).take(6), navController)
+            AnimeSection("Recommendations", animeList.drop(10).take(10), navController)
+        }
+
+        // 🔥 SHOW DIALOG
+        if (showDialog) {
+            AddAnimeDialog(
+                onDismiss = { showDialog = false },
+                onAdd = { newAnime ->
+                    animeList.add(newAnime)
+                }
+            )
         }
     }
 }
