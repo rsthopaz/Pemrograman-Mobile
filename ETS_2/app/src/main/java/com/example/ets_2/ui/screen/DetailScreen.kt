@@ -62,7 +62,7 @@ fun DetailScreen(animeId: Int,navController: NavController, onToggleDarkMode: ()
                 ) {
 
                     Image(
-                        painter = painterResource(id = anime.imageRes),
+                        painter = rememberAsyncImagePainter(anime.imageUri),
                         contentDescription = it.title,
                         contentScale = ContentScale.Crop,
                         modifier = Modifier

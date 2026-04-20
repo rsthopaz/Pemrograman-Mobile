@@ -12,6 +12,12 @@ import androidx.navigation.compose.*
 import coil.compose.rememberAsyncImagePainter
 import androidx.compose.foundation.lazy.grid.*
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
@@ -25,11 +31,9 @@ fun GalleryScreen(
     navController: NavController,
     onToggleDarkMode: () -> Unit
 ) {
-    val animelist = DummyData.animeList
-
-    val todaylist = animelist.take(5)
-    val thisseasonlist = animelist.drop(5).take(5)
-    val recommendationlist = animelist.drop(10).take(5)
+    val animeList = remember { mutableStateListOf<Anime>().apply {
+        addAll(DummyData.animeList)
+    }}
 
     Scaffold(
         topBar = {
@@ -44,6 +48,20 @@ fun GalleryScreen(
                     }
                 }
             )
+        },
+
+        // 🔥 FAB (ADD BUTTON)
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = {
+                    // nanti buka dialog add anime
+                }
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = "Add Anime"
+                )
+            }
         }
     ) { padding ->
 
@@ -52,9 +70,10 @@ fun GalleryScreen(
                 .padding(padding)
                 .background(MaterialTheme.colorScheme.background)
         ) {
-            AnimeSection("Today", todaylist, navController)
-            AnimeSection("This Season", thisseasonlist, navController)
-            AnimeSection("Recommendations", recommendationlist, navController)
+
+            AnimeSection("Today", animeList.take(5), navController)
+            AnimeSection("This Season", animeList.drop(5).take(5), navController)
+            AnimeSection("Recommendations", animeList.drop(10).take(6), navController)
         }
     }
 }

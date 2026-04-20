@@ -37,7 +37,7 @@ fun AnimeItem(
     ) {
         Column (modifier = Modifier.fillMaxSize()){
             Image(
-                painter = painterResource(id = anime.imageRes),
+                painter = rememberAsyncImagePainter(anime.imageUri),
                 contentDescription = anime.title,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
