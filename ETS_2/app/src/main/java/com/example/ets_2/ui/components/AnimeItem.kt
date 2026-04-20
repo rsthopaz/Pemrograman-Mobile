@@ -32,6 +32,7 @@ fun AnimeItem(
 //            .padding(8.dp)
             .padding(start = 15.dp)
             .width(120.dp)
+
             .clickable { onClick() }
     ) {
         Column (modifier = Modifier.fillMaxSize()){

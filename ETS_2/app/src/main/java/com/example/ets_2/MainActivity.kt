@@ -15,6 +15,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import com.example.ets_2.ui.theme.ETS_2Theme
 import androidx.navigation.compose.*
 import com.example.ets_2.ui.screen.GalleryScreen
@@ -47,7 +48,9 @@ fun AppNavigation(
     NavHost(navController, startDestination = "gallery") {
 
         composable("gallery") {
-            GalleryScreen(navController)
+            GalleryScreen(navController = navController,
+                onToggleDarkMode = onToggleDarkMode
+                )
         }
 
         composable("detail/{id}") { backStackEntry ->
@@ -55,6 +58,7 @@ fun AppNavigation(
 
             DetailScreen(
                 animeId = id,
+                navController = navController,
                 onToggleDarkMode = onToggleDarkMode
             )
         }

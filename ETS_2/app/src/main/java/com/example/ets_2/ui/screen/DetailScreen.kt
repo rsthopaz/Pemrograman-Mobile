@@ -10,6 +10,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -30,7 +31,7 @@ import com.example.ets_2.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailScreen(animeId: Int, onToggleDarkMode: () -> Unit) {
+fun DetailScreen(animeId: Int,navController: NavController, onToggleDarkMode: () -> Unit) {
     val anime = DummyData.animeList.find { it.id == animeId }
     Scaffold(
         topBar = {
@@ -129,7 +130,8 @@ fun DetailScreen(animeId: Int, onToggleDarkMode: () -> Unit) {
                     Spacer(modifier = Modifier.height(10.dp))
                     Text(
                         text = it.synopsis,
-                        color = MaterialTheme.colorScheme.onBackground
+                        color = MaterialTheme.colorScheme.onBackground,
+                        textAlign = TextAlign.Justify
                     )
                 }
                 Spacer(modifier = Modifier.height(16.dp))
