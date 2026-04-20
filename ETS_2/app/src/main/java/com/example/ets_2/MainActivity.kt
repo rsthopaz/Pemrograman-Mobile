@@ -9,6 +9,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.ets_2.ui.theme.ETS_2Theme
@@ -21,13 +25,23 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            AppNavigation()
+            var darkMode by remember { mutableStateOf(false) }
+
+            ETS_2Theme(darkTheme = darkMode) {
+                AppNavigation(
+                    darkMode = darkMode,
+                    onToggleDarkMode = { darkMode = !darkMode }
+                )
+            }
         }
     }
 }
 
 @Composable
-fun AppNavigation() {
+fun AppNavigation(
+    darkMode: Boolean,
+    onToggleDarkMode: () -> Unit
+) {
     val navController = rememberNavController()
 
     NavHost(navController, startDestination = "gallery") {
@@ -38,7 +52,11 @@ fun AppNavigation() {
 
         composable("detail/{id}") { backStackEntry ->
             val id = backStackEntry.arguments?.getString("id")?.toInt() ?: 0
-            DetailScreen(id)
+
+            DetailScreen(
+                animeId = id,
+                onToggleDarkMode = onToggleDarkMode
+            )
         }
     }
 }
