@@ -6,5 +6,5 @@ import androidx.navigation.NavController
 
 @Composable
 fun LoginScreen(navController: NavController){
-
+    
 }
