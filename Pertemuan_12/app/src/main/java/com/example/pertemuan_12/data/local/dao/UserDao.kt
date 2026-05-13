@@ -11,10 +11,10 @@ interface UserDao {
     suspend fun insert(user: User)
 
     @Query(
-        "SELECT * FROM users WHERE username = :name AND password = :password"
+        "SELECT * FROM users WHERE username = :username AND password = :password"
     )
     suspend fun login(
-        name: String,
+        username: String,
         password: String
     ): User?
 }
