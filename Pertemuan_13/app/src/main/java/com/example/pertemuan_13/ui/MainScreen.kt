@@ -86,13 +86,13 @@ fun MainScreen(
 
             items(siswaList) { siswa ->
 
-                StudentItem(
+                SiswaItem(
                     siswa = siswa,
                     onDelete = {
                         viewModel.hapusSiswa(siswa)
                     },
                     onEdit = {
-                        viewModel.editSiswa(
+                        viewModel.updateSiswa(
                             siswa.copy(
                                 nama = siswa.nama + " Updated"
                             )

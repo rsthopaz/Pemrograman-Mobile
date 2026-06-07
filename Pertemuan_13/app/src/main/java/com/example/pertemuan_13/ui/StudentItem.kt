@@ -29,7 +29,7 @@ fun SiswaItem(
             .padding(vertical = 6.dp),
         shape = RoundedCornerShape(20.dp)
     ) {
-        Row(
+        Box(
             modifier = Modifier
                 .size(50.dp)
                 .clip(CircleShape)
