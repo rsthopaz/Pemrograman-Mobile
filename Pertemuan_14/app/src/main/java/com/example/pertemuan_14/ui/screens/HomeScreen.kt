@@ -16,6 +16,8 @@ import com.example.pertemuan_14.data.model.Article
 import com.example.pertemuan_14.ui.components.NewsCard
 import com.example.pertemuan_14.ui.state.NewsUiState
 import com.example.pertemuan_14.viewmodel.NewsViewModel
+import androidx.compose.runtime.getValue
+import androidx.compose.foundation.lazy.items
 
 @Composable
 fun HomeScreen(
@@ -41,9 +43,6 @@ fun HomeScreen(
                     .articles
             LazyColumn {
                 items(articles){ article ->
-
-                    9
-
                     NewsCard(
                         article = article
                     ){
