@@ -9,7 +9,7 @@ class NewsRepository {
     suspend fun getNews()=
         RetrofitClient.apiService
             .getTopHeadlines(
-                apikey= BuildConfig.NEWS_API_KEY
+                apiKey= BuildConfig.NEWS_API_KEY
             )
 
 }

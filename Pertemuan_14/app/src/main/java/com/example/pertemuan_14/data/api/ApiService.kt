@@ -12,7 +12,7 @@ interface ApiService {
         country: String = "us"
 
         @Query("apiKey")
-        apikey: String
+        apiKey: String
 
     ): NewsResponse
 }
